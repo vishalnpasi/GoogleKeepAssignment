@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+//@RequestMapping("/note")
 public class FolderController {
     @Autowired
     private FolderService service;
@@ -20,9 +21,9 @@ public class FolderController {
         return new ResponseEntity<>(service.saveFolder(model), HttpStatus.CREATED);
     }
     @GetMapping("/folder/{id}")
-    public ResponseEntity<FolderModel> getFolderById(@PathVariable String id){
+    public FolderModel getFolderById(@PathVariable String id){
         logger.info("get(/folder) api has called");
-        return new ResponseEntity<>(service.findFolderById(id),HttpStatus.OK);
+        return service.findFolderById(id);
     }
     @PutMapping("/folder/{id}")
     public ResponseEntity<FolderModel> updateFolderById(@RequestBody FolderModel model,@PathVariable String id){
@@ -37,3 +38,4 @@ public class FolderController {
         return new ResponseEntity<>(service.deleteFolderById(id),HttpStatus.OK);
     }
 }
+
